@@ -9,7 +9,7 @@ interface GridCanvasProps {
   color?: string;
 }
 
-const CELL_SIZE = 20; // Size of each cell in pixels
+const CELL_SIZE = 15; // Size of each cell in pixels
 const GRID_COLOR = '#334155'; // Slate-700
 // const ALIVE_COLOR = '#38bdf8'; // Sky-400 (DEFAULT REMOVED)
 const DEAD_COLOR = '#0f172a'; // Slate-900 (Background)

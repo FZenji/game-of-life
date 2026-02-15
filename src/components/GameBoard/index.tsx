@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { HelpCircle } from 'lucide-react';
+import { HelpCircle, Volume2, VolumeOff } from 'lucide-react';
 import GridCanvas from './GridCanvas';
 import Controls from './Controls';
 import HelpModal from '../HelpModal';
 import ColorPicker from '../ColorPicker';
-import { playSound } from '../../utils/sound';
+import { playSound, setGlobalMute } from '../../utils/sound';
 
 // Simulation Configuration
 const ROWS = 40;
@@ -29,6 +29,7 @@ export default function Game() {
   const [speed, setSpeed] = useState(500); // Start halfway (approx 500ms)
   const [themeColor, setThemeColor] = useState('#38bdf8');
   const [showHelp, setShowHelp] = useState(true); // Show on load
+  const [isMuted, setIsMuted] = useState(false);
 
   const runningRef = useRef(running);
   runningRef.current = running;
@@ -69,7 +70,11 @@ export default function Game() {
       return changed ? nextGrid : g;
     });
 
-    setGeneration((gen) => gen + 1);
+    setGeneration((gen) => {
+        playSound('step'); // Loop sound
+        return gen + 1;
+    });
+    
     setTimeout(runSimulation, speedRef.current);
   }, []);
 
@@ -81,8 +86,6 @@ export default function Game() {
     
     if (isNowPlaying) {
       playSound('start');
-      // Store initial state if starting from gen 0 or if we haven't stored it yet
-      // However, usually we want to store the state *right before* we start modifying it via simulation.
       if (!initialGrid || generation === 0) {
           setInitialGrid(grid.map(row => [...row]));
       }
@@ -120,10 +123,18 @@ export default function Game() {
       }
   }, [initialGrid, handleClear]);
 
+  const toggleMute = useCallback(() => {
+      setIsMuted(prev => {
+          const newState = !prev;
+          setGlobalMute(newState);
+          return newState;
+      });
+  }, []);
+
   // Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if input is focused (though we have no text inputs here mainly)
+      // Ignore if input is focused
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
       switch(e.key.toLowerCase()) {
@@ -145,6 +156,14 @@ export default function Game() {
         case '/':
            setShowHelp(prev => !prev);
            break;
+        case '+':
+        case '=': // Support = for + functionality without shift
+             setSpeed(prev => Math.max(50, prev - 50)); // Decrease interval = Increase speed
+             break;
+        case '-':
+        case '_':
+             setSpeed(prev => Math.min(1000, prev + 50)); // Increase interval = Decrease speed
+             break;
       }
     };
 
@@ -168,7 +187,16 @@ export default function Game() {
         </div>
         
         <div className="mt-4 md:mt-0 flex gap-4 items-center">
+             <button 
+               onClick={toggleMute}
+               className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-300 transition-colors"
+               title={isMuted ? "Unmute" : "Mute"}
+             >
+                 {isMuted ? <VolumeOff size={20} /> : <Volume2 size={20} />}
+             </button>
+             
              <ColorPicker color={themeColor} setColor={setThemeColor} />
+             
              <button 
                onClick={() => setShowHelp(true)}
                className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-300 transition-colors"

@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   description: 'A sleek, interactive Conway\'s Game of Life simulation with glassmorphism UI. Developed by Henry Tolenaar.',
   authors: [{ name: 'Henry Tolenaar' }],
   keywords: ['Game of Life', 'Simulation', 'Cellular Automata', 'Glassmorphism', 'React', 'Next.js'],
+  icons: [
+    { rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' },
+    { rel: 'icon', url: '/favicon.ico' },
+    { rel: 'apple-touch-icon', url: '/apple-touch-icon.png' },
+  ],
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
