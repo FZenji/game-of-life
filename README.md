@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Game of Life
 
-## Getting Started
+A sleek, interactive simulation of Conway's Game of Life, built with modern web technologies.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This application provides a visual playground for cellular automata. Users can interact with the grid, paint initial states, and watch the simulation unfold with adjustable speeds. The interface is designed with a premium "glassmorphism" aesthetic, offering a modern and immersive experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Interactive Grid**: Click and drag to paint your own starting patterns or modify the simulation in real-time.
+- **Playback Controls**: Play, pause, reset, and clear the grid at any time.
+- **Speed Adjustment**: Control the evolution speed with a smooth slider.
+- **Randomize**: Instantly generate a random pattern to start experimenting.
+- **Customization**: Choose from preset color themes or pick your own custom color.
+- **Responsive Design**: Fully functional on both desktop and mobile devices.
+- **Sound Effects**: Satisfying audio feedback for interactions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Shortcuts
 
-## Learn More
+| Action | Shortcut |
+|Refining Fractal Explorer | :--- |
+| **Play / Pause** | `Space` |
+| **Reset Pattern** | `R` |
+| **Clear Board** | `C` or `D` |
+| **Randomize** | `Z` |
+| **Help** | `?` |
 
-To learn more about Next.js, take a look at the following resources:
+## Technology Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework**: [Next.js](https://nextjs.org/) (React)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animation**: HTML5 Canvas for high-performance rendering.
+- **Audio**: Web Audio API for synthetic sound generation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Credits
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Developed by **Henry Tolenaar**.
